@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Login Signup Form</title>
+
+    <link rel="stylesheet" href="main.css" />
+  </head>
+
+  <body>
+    <div class="mainBox">
+      <h2 class="heading">Signup Form</h2>
+
+      <div id="signupBox">
+        <input
+          class="inputBox"
+          id="sname"
+          type="text"
+          placeholder="Enter Name"
+        />
+
+        <input
+          class="inputBox"
+          id="semail"
+          type="email"
+          placeholder="Enter Email"
+        />
+
+        <input
+          class="inputBox"
+          id="spass"
+          type="password"
+          placeholder="Enter Password"
+        />
+
+        <button class="btn" onclick="signup()">Signup</button>
+
+        <p class="linkBtn" onclick="showLogin()">Already have account? Login</p>
+      </div>
+
+      <div id="loginBox" style="display: none">
+        <h2 class="heading">Login Form</h2>
+
+        <input
+          class="inputBox"
+          id="lemail"
+          type="email"
+          placeholder="Enter Email"
+        />
+
+        <input
+          class="inputBox"
+          id="lpass"
+          type="password"
+          placeholder="Enter Password"
+        />
+
+        <button class="btn" onclick="login()">Login</button>
+
+        <p class="linkBtn" onclick="showSignup()">Create new account</p>
+      </div>
+
+      <div class="showData" id="result"></div>
+    </div>
+
+    <script>
+      let userData = {};
+
+      function signup() {
+        let name = document.getElementById("sname").value;
+        let email = document.getElementById("semail").value;
+        let pass = document.getElementById("spass").value;
+
+        userData = {
+          name: name,
+          email: email,
+          password: pass,
+        };
+
+        console.log("Signup Data:", userData);
+
+        document.getElementById("result").innerHTML =
+          "Signup Successful <br>Name: " + name + " <br>Email: " + email;
+      }
+
+      function login() {
+        let email = document.getElementById("lemail").value;
+        let pass = document.getElementById("lpass").value;
+
+        console.log("Login Input:", email, pass);
+
+        if (email === userData.email && pass === userData.password) {
+          document.getElementById("result").innerHTML =
+            "Login Successful <br>Welcome " + userData.name;
+        } else {
+          document.getElementById("result").innerHTML =
+            "Wrong Email or Password";
+        }
+      }
+
+      function showLogin() {
+        document.getElementById("signupBox").style.display = "none";
+        document.getElementById("loginBox").style.display = "block";
+      }
+
+      function showSignup() {
+        document.getElementById("signupBox").style.display = "block";
+        document.getElementById("loginBox").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
