@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pro Marksheet Generator</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Student Report</h2>
+
+      <div class="input-group">
+        <input type="text" id="name" placeholder="Student Name" />
+        <input type="number" id="sub1" placeholder="English" />
+        <input type="number" id="sub2" placeholder="Mathematics" />
+        <input type="number" id="sub3" placeholder="Science" />
+        <input type="number" id="sub4" placeholder="Computer Science" />
+        <input type="number" id="sub5" placeholder="Urdu" />
+      </div>
+
+      <button class="btn" onclick="makeResult()">Generate Analytics</button>
+
+      <div id="show"></div>
+    </div>
+
+    <script>
+      function makeResult() {
+        const name = document.getElementById("name").value || "N/A";
+        const m1 = Number(document.getElementById("sub1").value);
+        const m2 = Number(document.getElementById("sub2").value);
+        const m3 = Number(document.getElementById("sub3").value);
+        const m4 = Number(document.getElementById("sub4").value);
+        const m5 = Number(document.getElementById("sub5").value);
+
+        const total = m1 + m2 + m3 + m4 + m5;
+        const percent = total / 5;
+        let grade = "";
+
+        if (percent >= 80) grade = "A+";
+        else if (percent >= 70) grade = "A";
+        else if (percent >= 60) grade = "B";
+        else if (percent >= 50) grade = "C";
+        else grade = "Fail";
+
+        const resultDiv = document.getElementById("show");
+        resultDiv.innerHTML = `
+            <div class="result-card">
+                <div class="stat-row"><span class="label">Student</span> <span class="val">${name}</span></div>
+                <div class="stat-row"><span class="label">Total Score</span> <span class="val">${total} / 500</span></div>
+                <div class="stat-row"><span class="label">Percentage</span> <span class="val">${percent}%</span></div>
+                <div class="stat-row"><span class="label">Status</span> <span class="grade-pill">${grade}</span></div>
+            </div>
+        `;
+      }
+    </script>
+  </body>
+</html>
